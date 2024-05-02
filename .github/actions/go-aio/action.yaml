@@ -17,7 +17,7 @@ inputs:
   version-file:
     description: "Go version file (go.mod)"
     required: false
-    default: ""
+    default: "go.mod"
 
 runs:
   using: "composite"
