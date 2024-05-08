@@ -13,7 +13,7 @@ inputs:
   version:
     description: "Go version"
     required: false
-    default: "1.18"
+    default: ""
   version-file:
     description: "Go version file (go.mod)"
     required: false
