@@ -18,6 +18,10 @@ inputs:
     description: "Go version file (go.mod)"
     required: false
     default: "go.mod"
+  vendor:
+    description: "Vendor Go dependencies"
+    required: false
+    default: true
 
 runs:
   using: "composite"
@@ -30,5 +34,6 @@ runs:
         cache: true
     - run: git config --global url.https://${{ inputs.user }}:${{ inputs.pat }}@github.com/.insteadOf https://github.com/
       shell: bash
-    - run: go mod vendor
+    - if: ${{ inputs.vendor == 'true' }}
+      run: go mod vendor
       shell: bash

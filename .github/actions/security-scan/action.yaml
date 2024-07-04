@@ -1,0 +1,21 @@
+name: Security Scan
+description: "Run Go vulernability scan and Trivy repo scan"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: go.mod
+    - name: Go Vulnerability Check
+      id: govulncheck
+      uses: golang/govulncheck-action@v1
+    - name: Run Trivy vulnerability scanner in repo mode
+      uses: aquasecurity/trivy-action@0.23.0
+      with:
+        scan-type: 'fs'
+        ignore-unfixed: true
+        format: 'table' 
+        severity: 'CRITICAL'
+        exit-code: '1'
