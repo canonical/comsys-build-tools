@@ -1,6 +1,12 @@
 name: Security Scan
 description: "Run Go vulernability scan and Trivy repo scan"
 
+# TEMP FIX FOR: https://github.com/aquasecurity/trivy-action/issues/389
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: false
+
 runs:
   using: "composite"
   steps:
