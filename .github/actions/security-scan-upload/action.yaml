@@ -87,7 +87,7 @@ runs:
       uses: actions/upload-artifact@v4
       if: ${{ inputs.upload-sarif-artifact == 'true' && inputs.container-name != '' }}
       with:
-        name: container-scan-results-${{ inputs.container-name }}${{ inputs.result-suffix != '' && format('-{0}', inputs.result-suffix) || '' }}
+        name: container-scan-results${{ inputs.result-suffix != '' && format('-{0}', inputs.result-suffix) || '' }}
         path: 'container-trivy-results.sarif'
 
     - name: Upload container Trivy scan results to GitHub Security tab
