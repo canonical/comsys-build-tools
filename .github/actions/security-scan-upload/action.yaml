@@ -53,7 +53,8 @@ runs:
     # Trivy #
     #########
     - name: Run Trivy vulnerability scanner in repo mode
-      uses: aquasecurity/trivy-action@0.23.0
+      # Pin to v0.35.0 to prevent trivy vulnerability (See: https://github.com/aquasecurity/trivy/discussions/10425)
+      uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
       with:
         scan-type: 'fs'
         format: 'sarif'
@@ -76,7 +77,8 @@ runs:
 
     # Trivy container scan
     - name: Run Trivy container scanner
-      uses: aquasecurity/trivy-action@0.28.0
+      # Pin to v0.35.0 to prevent trivy vulnerability (See: https://github.com/aquasecurity/trivy/discussions/10425)
+      uses: aquasecurity/trivy-action@57a97c7e7821a5776cebc9bb87c984fa69cba8f1
       if: ${{ inputs.container-name != '' }}
       with:
         image-ref: ${{ inputs.container-name }}
