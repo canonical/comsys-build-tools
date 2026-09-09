@@ -5,12 +5,24 @@ description: |
   This is designed to be run in CI on pull requests and/or pushes and provides exit codes 
   when vulnerabilities are found. 
 
+inputs:
+  repo-checkout:
+    description: |
+      Whether golang/govulncheck-action should check out the repository.
+      Set to 'false' when the caller has already checked out the sources to
+      scan (for example a different repository), so that the nested checkout
+      does not replace them.
+    required: false
+    default: 'true'
+
 runs:
   using: "composite"
   steps:
     - name: Go Vulnerability Check
       id: govulncheck
       uses: golang/govulncheck-action@v1
+      with:
+        repo-checkout: ${{ inputs.repo-checkout }}
 
     - name: Run Trivy vulnerability scanner in repo mode
       # Pin to v0.35.0 to prevent trivy vulnerability (See: https://github.com/aquasecurity/trivy/discussions/10425)
